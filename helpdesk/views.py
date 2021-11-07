@@ -3,5 +3,17 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def index(request):
-    return HttpResponse("This is the index.")
+class IndexView(generic.ListView):
+    template_name = 'helpdesk/index.html'
+    context_object_name = 'queues_list'
+
+    def get_queryset(self):
+        return Queue.objects
+
+def queues(request):
+    return HttpResponse("All queues here")
+
+def queue(request, queue_id):
+    return HttpResponse("Looking at the following queue: %s" % queue_id)
+
+
